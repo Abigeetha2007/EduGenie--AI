@@ -1,0 +1,19 @@
+# 7. Project Documentation Phase
+**Project Name:** EduGenie - Google Gemini Powered Learning Assistant
+
+## Project Overview
+EduGenie is an AI-powered learning assistant built with FastAPI and Google Gemini 1.5 Pro to provide personalized educational support.
+
+## Local Setup & Installation
+
+### Prerequisites
+* Python 3.10 or higher installed.
+* Git installed.
+* Active API key for Google Gemini (Google AI Studio).
+
+### Step-by-Step Installation
+
+1. **Clone the Repository:**
+   ```bash
+   git clone [https://github.com/](https://github.com/)<your-username>/EduGenie.git
+   cd EduGenie
