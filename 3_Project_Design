@@ -1,0 +1,33 @@
+# 3. Project Design Phase
+**Project Name:** EduGenie - Google Gemini Powered Learning Assistant
+
+## System Architecture
+The application follows a client-server architecture:
+1. **Frontend UI:** HTML5/CSS3 rendered via Jinja2 templates for user interaction.
+2. **Backend API:** FastAPI routes requests to corresponding module services.
+3. **AI Inference Layer:**
+   * Cloud Inference: Google Gemini 1.5 Pro API.
+   * Local Inference: LaMini-Flan-T5-783M running on PyTorch/Transformers.
+
+## Folder & Repository Architecture
+EduGenie/
+├── main.py                     # FastAPI application & REST API routes
+├── explanation_module.py       # LaMini-Flan-T5-783M concept explanation logic
+├── qna.py                      # Gemini 1.5 Pro Q&A logic
+├── quiz_module.py              # Quiz generation & JSON cleaning logic
+├── summary_module.py           # Passage summarization logic
+├── learning_path.py            # Adaptive learning recommendations logic
+├── requirements.txt            # Project Python dependencies
+├── templates/
+│   └── index.html              # User interface HTML template
+└── static/
+    └── style.css               # User interface styling sheet
+
+## API Endpoint Design
+| Endpoint | Method | Input Payload / Query | Description |
+| :--- | :--- | :--- | :--- |
+| `/qa` | GET | `question: str` | Answers academic questions |
+| `/explain/` | POST | `{"topic": "str"}` | Generates simplified concept breakdowns |
+| `/summarize/` | POST | `{"text": "str"}` | Condenses text into summary points |
+| `/quiz` | POST | `{"text": "str"}` | Generates 3 MCQs in JSON format |
+| `/learn/recommendations` | GET | `topic: str` | Generates a structured learning roadmap |
