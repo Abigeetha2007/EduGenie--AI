@@ -1,0 +1,16 @@
+# 8. Project Demonstration Phase
+**Project Name:** EduGenie - Google Gemini Powered Learning Assistant
+
+## Demo Video Information
+* **Video Host:** Google Drive (Set to "Public / Anyone with the link can view")
+* **Demonstration Link:** `https://drive.google.com/your-demo-video-link-here`
+
+## Demonstration Content Highlights
+1. **Introduction:** Overview of EduGenie, project objectives, and key benefits.
+2. **Architecture:** Brief overview of backend (FastAPI), local AI model execution (LaMini-Flan-T5-783M), and cloud AI integration (Gemini 1.5 Pro).
+3. **Live Execution Walkthrough:**
+   * Querying general knowledge questions via the Q&A interface.
+   * Explaining complex technical concepts (e.g., Binary Search, Quantum Computing).
+   * Generating interactive quizzes from custom passages.
+   * Creating step-by-step learning roadmaps for technical subjects like SQL.
+4. **Final Conclusion & Deliverables Summary:** Summary of accomplishments and potential future scope.
