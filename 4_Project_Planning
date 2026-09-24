@@ -1,0 +1,25 @@
+# 4. Project Planning Phase
+**Project Name:** EduGenie - Google Gemini Powered Learning Assistant
+
+## Project Schedule & Milestones
+
+### Milestone 1: Model Selection & Architecture Setup
+* Setup Python 3.10+ virtual environment.
+* Select cloud AI models (Gemini 1.5 Pro) and local models (LaMini-Flan-T5-783M).
+* Establish project folder structure.
+
+### Milestone 2: Core Functionality & Module Development
+* Develop individual logic modules (`qna.py`, `explanation_module.py`, `quiz_module.py`, `summary_module.py`, `learning_path.py`).
+* Implement JSON cleaning utility for structured quiz outputs.
+* Build FastAPI endpoint routes in `main.py`.
+
+### Milestone 3: Frontend Integration
+* Design user input forms using HTML5/CSS3.
+* Set up dynamic rendering using Jinja2 templates.
+* Connect frontend form submissions to backend REST APIs.
+
+### Milestone 4: Testing, Deployment & Documentation
+* Perform functional end-to-end testing across all modules.
+* Deploy application locally using Uvicorn ASGI server.
+* Generate complete project documentation and demonstration materials.
+
