@@ -1,0 +1,12 @@
+# 6. Project Testing Phase
+**Project Name:** EduGenie - Google Gemini Powered Learning Assistant
+
+## Test Scenarios & Verification
+
+| Test Case ID | Feature / Endpoint | Test Input | Expected Outcome | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **TC-01** | Q&A (`/qa`) | "Which is the largest ocean?" | Returns "The Pacific Ocean is the largest ocean on Earth." | **PASSED** |
+| **TC-02** | Concept Explanation (`/explain`) | "Quantum Computing" | Generates simplified, beginner-friendly explanation without complex jargon. | **PASSED** |
+| **TC-03** | Quiz Generator (`/quiz`) | Passage on "Pythagoras Theorem" | Returns valid JSON array containing 3 MCQs with 4 options and correct answers. | **PASSED** |
+| **TC-04** | Text Summarizer (`/summarize`) | Passage on "Industrial Revolution" | Produces a concise summary highlighting key historical events. | **PASSED** |
+| **TC-05** | Learning Path (`/learn/recommendations`) | "SQL" | Generates structured multi-level roadmap (Beginner, Intermediate, Advanced) with resources. | **PASSED** |
