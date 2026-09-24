@@ -1,0 +1,22 @@
+# 2. Requirement Analysis Phase
+**Project Name:** EduGenie - Google Gemini Powered Learning Assistant
+
+## System Requirements
+
+### Hardware Requirements
+* **Processor:** Apple Silicon (Mac M1/M2/M3) or modern x86 CPU.
+* **RAM:** Minimum 8 GB RAM (16 GB recommended for smooth execution of local models).
+* **Storage:** At least 5 GB available disk space for local models and dependencies.
+
+### Software Requirements
+* **Operating System:** macOS, Windows 10/11, or Linux.
+* **Programming Language:** Python 3.10 or higher.
+* **Backend Framework:** FastAPI.
+* **ASGI Server:** Uvicorn.
+* **Templating & UI:** HTML5, CSS3, Jinja2.
+* **Machine Learning / AI SDKs:** PyTorch, Hugging Face Transformers, Google Generative AI SDK (`google-generativeai`).
+
+## Third-Party APIs & Models
+* **Google Gemini 1.5 Pro API:** Handles Q&A, quiz creation, text summarization, and learning paths.
+* **MBZUAI/LaMini-Flan-T5-783M:** Local Hugging Face transformer model used for beginner-friendly concept explanations.
+
