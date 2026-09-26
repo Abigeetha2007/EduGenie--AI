@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>EduGenie - AI Learning Assistant</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <h1>EduGenie</h1>
+
+        <p>
+            Google Gemini Powered Learning Assistant
+        </p>
+
+    </header>
+
+
+
+    <!-- INPUT CARD -->
+
+    <section class="card">
+
+        <h2>Learning Assistant</h2>
+
+
+        <label for="task">
+            Choose a task
+        </label>
+
+
+        <select id="task">
+
+            <option value="qa">
+                Question & Answer
+            </option>
+
+            <option value="explain">
+                Explain a Topic
+            </option>
+
+            <option value="quiz">
+                Generate Quiz
+            </option>
+
+            <option value="summarize">
+                Summarize
+            </option>
+
+            <option value="learn">
+                Learning Path
+            </option>
+
+        </select>
+
+
+
+        <label for="inputText">
+            Enter your question, topic or text
+        </label>
+
+
+        <textarea
+            id="inputText"
+            rows="10"
+            placeholder="Example: Explain the Pythagoras theorem in simple words."
+        ></textarea>
+
+
+
+        <button id="submitBtn">
+            Generate
+        </button>
+
+
+        <p id="status"></p>
+
+    </section>
+
+
+
+    <!-- RESULT CARD -->
+
+    <section class="card">
+
+        <h2>Result</h2>
+
+
+        <div id="result"
+             class="result">
+
+            Your result will appear here.
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+const task =
+    document.getElementById("task");
+
+const inputText =
+    document.getElementById("inputText");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+const result =
+    document.getElementById("result");
+
+const status =
+    document.getElementById("status");
+
+
+
+const endpoints = {
+
+    qa: "/qa",
+
+    explain: "/explain",
+
+    quiz: "/quiz",
+
+    summarize: "/summarize",
+
+    learn: "/learn/recommendations"
+
+};
+
+
+
+submitBtn.addEventListener(
+    "click",
+    async function () {
+
+        const text =
+            inputText.value.trim();
+
+
+        if (!text) {
+
+            status.textContent =
+                "Please enter some text.";
+
+            return;
+
+        }
+
+
+        submitBtn.disabled = true;
+
+        status.textContent =
+            "EduGenie is thinking...";
+
+        result.innerHTML = "";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    endpoints[task.value],
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            text: text
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Request failed."
+                );
+
+            }
+
+
+            if (task.value === "quiz") {
+
+                displayQuiz(
+                    data.result
+                );
+
+            }
+
+            else {
+
+                result.textContent =
+                    data.result;
+
+            }
+
+
+            status.textContent =
+                "Completed successfully.";
+
+        }
+
+
+        catch (error) {
+
+            status.textContent =
+                "Something went wrong.";
+
+            result.textContent =
+                error.message;
+
+        }
+
+
+        finally {
+
+            submitBtn.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+
+function displayQuiz(quiz) {
+
+    result.innerHTML = "";
+
+
+    if (quiz.error) {
+
+        result.textContent =
+            quiz.error;
+
+        return;
+
+    }
+
+
+    quiz.forEach(
+        function (item, index) {
+
+
+            const questionBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            questionBox.className =
+                "quiz-question";
+
+
+            const question =
+                document.createElement(
+                    "h3"
+                );
+
+
+            question.textContent =
+                `${index + 1}. ${item.question}`;
+
+
+            questionBox.appendChild(
+                question
+            );
+
+
+            const feedback =
+                document.createElement(
+                    "p"
+                );
+
+
+            feedback.className =
+                "feedback";
+
+
+            item.options.forEach(
+                function (option) {
+
+
+                    const label =
+                        document.createElement(
+                            "label"
+                        );
+
+
+                    label.className =
+                        "option";
+
+
+                    const radio =
+                        document.createElement(
+                            "input"
+                        );
+
+
+                    radio.type =
+                        "radio";
+
+
+                    radio.name =
+                        `question-${index}`;
+
+
+                    radio.value =
+                        option;
+
+
+                    radio.addEventListener(
+                        "change",
+                        function () {
+
+
+                            if (
+                                option ===
+                                item.answer
+                            ) {
+
+                                feedback.textContent =
+                                    "Correct!";
+
+                                feedback.className =
+                                    "feedback correct";
+
+                            }
+
+                            else {
+
+                                feedback.textContent =
+                                    `Wrong. Correct answer: ${item.answer}`;
+
+                                feedback.className =
+                                    "feedback wrong";
+
+                            }
+
+                        }
+                    );
+
+
+                    label.appendChild(
+                        radio
+                    );
+
+
+                    label.appendChild(
+                        document.createTextNode(
+                            " " + option
+                        )
+                    );
+
+
+                    questionBox.appendChild(
+                        label
+                    );
+
+                }
+            );
+
+
+            questionBox.appendChild(
+                feedback
+            );
+
+
+            const explanation =
+                document.createElement(
+                    "p"
+                );
+
+
+            explanation.className =
+                "explanation";
+
+
+            explanation.textContent =
+                "Explanation: " +
+                item.explanation;
+
+
+            questionBox.appendChild(
+                explanation
+            );
+
+
+            result.appendChild(
+                questionBox
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
